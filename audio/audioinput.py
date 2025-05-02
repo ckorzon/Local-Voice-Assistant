@@ -39,7 +39,3 @@ class SpeechCollector:
             except sr.RequestError as e:
                 self._logger.error(f"Could not request results; {e}")
                 return ""
-
-    def __del__(self):
-        if self._microphone:
-            self._microphone.close()
