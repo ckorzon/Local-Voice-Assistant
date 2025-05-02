@@ -23,6 +23,7 @@ def main():
     speech_collector = SpeechCollector(audio_device_manager)
     speech_collector.capture_speech()
     speech_captured = speech_collector.capture_speech()
+    LOGGER.info(f"Captured speech: {speech_captured}")
 
 
 

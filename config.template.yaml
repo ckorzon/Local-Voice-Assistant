@@ -1,7 +1,7 @@
 ﻿
 audio:
   input_device: "<The exact system name of the audio device you want to use for voice input; e.g. 'Microphone (Jabra SPEAK 410 USB)', or null for default>"
-  output_device: "<The exact system name of the audio device you want to use for output; e.g. 'Speaker (Jabra SPEAK 410 USB)', or null for default>"
+  output_device: "<The exact system name of the audio device you want to use for output; e.g. 'Speakers (Jabra SPEAK 410 USB)', or null for default>"
   preferred_api: "<Your preferred host audio API; e.g. 'Windows WASAPI', or null for default>"
 log_file: "<The path to your log file; e.g., 'C:/path/to/logfile.log', or null for logging to console>"
 ai_config:
