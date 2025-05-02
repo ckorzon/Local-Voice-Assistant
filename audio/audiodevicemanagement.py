@@ -5,14 +5,6 @@ import speech_recognition as sr
 from logging import getLogger
 from audio.audioconfig import AudioConfig
 
-CONFIG = safe_load(open('config.yaml', 'r', encoding='utf-8'))
-
-print(f"Configuration: {CONFIG}")
-
-PREFERRED_API = CONFIG.get("preferred_api")
-AUDIO_HANDLER = PyAudio()
-DESIRED_INPUT_DEVICE = CONFIG.get("input_device")
-
 
 class AudioDeviceManager:
 
@@ -37,8 +29,8 @@ class AudioDeviceManager:
         """
         try:
             api_info, api_index = None, 0
-            for i in range(AUDIO_HANDLER.get_host_api_count()):
-                api_info = AUDIO_HANDLER.get_host_api_info_by_index(i)
+            for i in range(self._audio_handler.get_host_api_count()):
+                api_info = self._audio_handler.get_host_api_info_by_index(i)
                 if api_info.get('name') == target_api_name:
                     api_index = i
                     break
@@ -76,11 +68,11 @@ class AudioDeviceManager:
             _PaDeviceInfo: PyAudio device info object for the targeted audio device.
         """
         device_name = device_name.upper()
-        host_info = AUDIO_HANDLER.get_host_api_info_by_index(self._api_index)
+        host_info = self._audio_handler.get_host_api_info_by_index(self._api_index)
         num_devices = host_info.get('deviceCount')
         audio_device = None
         for i in range(0, num_devices):
-            device_info = AUDIO_HANDLER.get_device_info_by_host_api_device_index(self._api_index, i)
+            device_info = self._audio_handler.get_device_info_by_host_api_device_index(self._api_index, i)
             if device_info.get('name').upper() == device_name:
                 audio_device = device_info
         return audio_device
