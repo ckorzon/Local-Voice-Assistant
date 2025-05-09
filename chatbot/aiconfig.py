@@ -8,3 +8,10 @@ class AIConfig:
         self.name = name
         self.endpoint = endpoint
 
+    @staticmethod
+    def from_dict(config: dict) -> "AIConfig":
+        return AIConfig(
+            model=config.get("model"),
+            name=config.get("name"),
+            endpoint=config.get("endpoint")
+        )
