@@ -30,7 +30,7 @@ class SpeechCollector:
             audio = self._speech_recognizer.listen(source)
             self._logger.info("Audio captured, processing...")
             try:
-                text = self._speech_recognizer.recognize_google(audio)
+                text = self._speech_recognizer.recognize_sphinx(audio)
                 self._logger.info(f"Recognized speech: {text}")
                 return text
             except sr.UnknownValueError:
