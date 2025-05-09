@@ -1,6 +1,6 @@
 
 from logging import getLogger
-from requests import Session
+from requests import Response, Session
 
 class HttpClient:
 
@@ -15,7 +15,7 @@ class HttpClient:
             'Accept': 'application/json'
         }
 
-    def post_request(self, route: str, headers: dict = None, data: dict = None, stream: bool = False) -> dict:
+    def post_request(self, route: str, headers: dict = None, data: dict = None, stream: bool = False) -> Response:
         url = f"{self._base_url}/{route}"
         request_headers = self._fixed_headers.copy()
         if headers:
@@ -23,9 +23,9 @@ class HttpClient:
         self._logger.debug(f"Sending POST request to {url} with headers {headers} and data {data}")
         response = self._session.post(url, headers=headers, json=data, stream=stream)
         response.raise_for_status()
-        return response.json()
+        return response
 
-    def get_request(self, route: str, headers: dict = None, stream: bool = False) -> dict:
+    def get_request(self, route: str, headers: dict = None, stream: bool = False) -> Response:
         url = f"{self._base_url}/{route}"
         request_headers = self._fixed_headers.copy()
         if headers:
@@ -33,4 +33,4 @@ class HttpClient:
         self._logger.debug(f"Sending GET request to {url} with headers {headers}")
         response = self._session.get(url, headers=headers, stream=stream)
         response.raise_for_status()
-        return response.json()
+        return response

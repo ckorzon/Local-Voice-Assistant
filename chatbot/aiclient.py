@@ -19,6 +19,7 @@ class AiClient:
         self._model = ai_config.model
         self._name = ai_config.name
         self._http_client = HttpClient(ai_config.endpoint)
+        self.initialize_session()
 
     def initialize_session(self):
         self.get_response_for_prompt(PROMPT_TEMPLATE.format(name=self._name))
@@ -28,6 +29,6 @@ class AiClient:
             "model": self._model,
             "prompt": prompt
         }
-        response = self._http_client.post_request("api/generate", data=data)
+        response = self._http_client.post_request("api/generate", data=data, stream=True)
         return AiResponse(response)
 
